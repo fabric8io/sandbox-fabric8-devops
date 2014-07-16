@@ -9,7 +9,7 @@
                 "mq-default"
             ],
             "minimumInstances": 1,
-            "profile": "quickstarts-karaf-camel.amq",
+            "profile": "quickstarts-karaf-camel.amq"
         }
     ]
 }
