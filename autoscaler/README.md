@@ -5,7 +5,11 @@ This folder containers a bunch of JSON files you can use with the [fabric8 autos
 To install a template its easiest to use the CLI in fabric8. e.g. 
 
     requirements-import https://raw.githubusercontent.com/fabric8io/fabric8-devops/master/autoscaler/mq-demo.json
-    
+
+Or if you are using [vagrant](http://www.vagrantup.com/downloads.html) or have some boxes configured you can run an ssh demo like this...
+
+    requirements-import https://raw.githubusercontent.com/fabric8io/fabric8-devops/master/autoscaler/ssh-mq-demo.json
+
 Then to view the requirements:
 
     requirements-list
