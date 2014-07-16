@@ -1,0 +1,7 @@
+## vagrant example scripts
+
+To use any of these scripts you should [install vagrant](http://www.vagrantup.com/downloads.html) on your box
+
+* bash uses plain bash so doesn't require anything else to be installed other than vagrant.
+* ansible using Anisble with vagrant
+* chef using Chef

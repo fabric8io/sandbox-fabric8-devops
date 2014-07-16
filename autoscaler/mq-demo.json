@@ -1,0 +1,15 @@
+{
+    "profileRequirements": [
+        {
+            "minimumInstances": 1,
+            "profile": "mq-default"
+        },
+        {
+            "dependentProfiles": [
+                "mq-default"
+            ],
+            "minimumInstances": 1,
+            "profile": "quickstarts-karaf-camel.amq",
+        }
+    ]
+}

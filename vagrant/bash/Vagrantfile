@@ -1,0 +1,73 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'socket'
+
+hostname = Socket.gethostname
+localmachineip = IPSocket.getaddress(Socket.gethostname)
+puts %Q{ This machine has the IP '#{localmachineip} and host name '#{hostname}'}
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = '2'
+
+%w(vagrant-hostmanager).each do |plugin|
+  # Will install dependent plugin
+  unless Vagrant.has_plugin?(plugin)
+    puts '*********************************'
+    puts "Installing #{plugin} plugin"
+    `vagrant plugin install #{plugin}`
+  end
+end
+
+
+default_chef_root = '.'
+chef_root = ENV['AEM_CHEF_ROOT'] || default_chef_root
+
+
+centos_box_name = 'CentOS-6.5-x64-new'
+centos_box_url = 'https://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.5-x86_64-v20140504.box'
+
+
+NETWORK_BASE = '192.168.50'
+
+FRONTEND_START_SEGMENT = 10
+INTEGRATION_START_SEGMENT = 20
+BACKEND_START_SEGMENT = 30
+
+$disableFirewall = <<SCRIPT
+echo disabling the firewall
+service iptables save
+service iptables stop
+chkconfig iptables off
+echo firewall disabled!
+
+# lets add the host name to the etc hosts
+echo >> /etc/hosts
+echo "#{localmachineip} #{hostname}" >> /etc/hosts
+echo "added ip address #{localmachineip} for host #{hostname} in /etc/hosts"
+SCRIPT
+
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.ignore_private_ip = false
+  config.hostmanager.include_offline = true
+
+  # how many boxes do we need?
+    (1..2).each do |i|
+
+      vmname = "integration#{i}"
+      config.vm.define vmname.to_sym do |integration|
+
+        # Every Vagrant virtual environment requires a box to build off of.
+        integration.vm.box = centos_box_name
+        integration.vm.box_url = centos_box_url
+        integration.vm.network :private_network, ip: "#{NETWORK_BASE}.#{INTEGRATION_START_SEGMENT+i}"
+        integration.vm.hostname = vmname
+      end
+      
+      config.vm.provision "shell", inline: $disableFirewall
+    end
+  end
