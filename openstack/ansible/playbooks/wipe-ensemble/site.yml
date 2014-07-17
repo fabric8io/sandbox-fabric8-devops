@@ -21,6 +21,6 @@
       - /bin/rm -rf data/log
 
   - name: Remove Fabric8
-    command: /bin/rm -fr {{ remote_path }}/{{ fabric8_name }}
+    command: /bin/rm -fr "{{ remote_path }}/{{ fabric8_name }}/containers"
     
 

@@ -1,0 +1,16 @@
+--- 
+- name: Copy over Fabric8
+  copy: src="{{ fabric8_file_name }}" dest="{{ remote_path }}/{{ fabric8_file_name }}"
+  
+- name: Extract the archive
+  command: chdir="{{ remote_path }}" creates="{{ fabric8_location }}" /usr/bin/unzip "{{ fabric8_file_name  }}"
+
+- name: Change ownership of fuse8 installation
+  file: path="{{ fabric8_location }}" owner="{{ user_name }}" group="{{ user_group }}" state=directory recurse=yes
+
+- name: Create directories for keys
+  command: creates=/opt/keys chdir=/opt /bin/mkdir keys
+
+- name: Install private key for accessing other nodes in the cluster
+  copy: src=private-key.pem dest=/opt/keys/private-key.pem group="{{ user_group }}" owner="{{ user_name }}"
+

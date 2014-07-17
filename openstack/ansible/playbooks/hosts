@@ -1,2 +1,7 @@
+[root-ensemble]
+fuse-zk
+
 [ensemble]
 fuse-zk
+fuse-zk2
+fuse-zk3

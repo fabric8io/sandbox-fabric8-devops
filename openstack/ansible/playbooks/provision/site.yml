@@ -12,11 +12,20 @@
   roles:
     - fabric8-common
 
-- name: provision fuse onto ensemble servers
+- name: apply common configs to all nodes
   hosts: ensemble
+  sudo: yes
+  user: cloud-user
+
+  roles:
+    - fabric8-ensemble
+
+
+- name: provision fuse onto root ensemble server
+  hosts: root-ensemble
   sudo: yes
   user: cloud-user
  
   roles:
-    - fabric8-ensemble
+    - fabric8-root-ensemble
 

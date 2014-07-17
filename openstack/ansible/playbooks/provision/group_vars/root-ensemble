@@ -1,0 +1,5 @@
+remote_path: "{{ lookup('env', 'FABRIC8_ANSIBLE_REMOTE_PATH') }}"
+fabric8_name: "{{ lookup('env', 'FABRIC8_ANSIBLE_NAME')  }}"
+fabric8_file_extension: zip
+fabric8_file_name: "{{ fabric8_name }}.{{ fabric8_file_extension }}"
+fabric8_location: "{{ remote_path }}/{{ fabric8_name }}"
