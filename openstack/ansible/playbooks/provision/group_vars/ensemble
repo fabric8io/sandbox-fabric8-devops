@@ -1,0 +1,7 @@
+remote_path: "{{ lookup('env', 'FABRIC8_ANSIBLE_REMOTE_PATH') }}"
+fabric8_name: "{{ lookup('env', 'FABRIC8_ANSIBLE_NAME')  }}"
+fabric8_file_extension: zip
+fabric8_file_name: "{{ fabric8_name }}.{{ fabric8_file_extension }}"
+user_name: "{{ lookup('env', 'FABRIC8_ANSIBLE_USER_NAME') }}"
+user_group: "{{ lookup('env', 'FABRIC8_ANSIBLE_USER_GROUP') }}"
+fabric8_location: "{{ remote_path }}/{{ fabric8_name }}"

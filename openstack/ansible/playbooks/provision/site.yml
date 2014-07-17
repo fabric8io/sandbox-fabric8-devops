@@ -1,0 +1,22 @@
+---
+# This playbook preps a set of servers for JBoss Fuse 
+# and installs fuse on the ensemble servers
+#
+#
+
+- name: apply common configs to all nodes
+  hosts: all
+  sudo: yes
+  user: cloud-user
+
+  roles:
+    - fabric8-common
+
+- name: provision fuse onto ensemble servers
+  hosts: ensemble
+  sudo: yes
+  user: cloud-user
+ 
+  roles:
+    - fabric8-ensemble
+
