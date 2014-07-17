@@ -1,0 +1,26 @@
+---
+- hosts: ensemble
+  vars: 
+      remote_path: "{{ lookup('env', 'FABRIC8_ANSIBLE_REMOTE_PATH') }}"
+      fabric8_name: "{{ lookup('env', 'FABRIC8_ANSIBLE_NAME')  }}"
+  remote_user: cloud-user
+  sudo: yes
+  tasks:
+  - name: Stop Fabric8
+    command: chdir={{ remote_path }} {{ item }}
+    with_items:
+      - /usr/bin/jps -l | /usr/bin/grep karaf | /usr/bin/cut -d ' ' -f 1 | /usr/bin/xargs -n1 /bin/kill -kill
+      - /bin/rm -rf instances/ processes/
+      - /bin/rm -rf data/cache
+      - /bin/rm -rf data/git
+      - /bin/rm -rf data/port
+      - /bin/rm -rf data/zookeeper
+      - /bin/rm -rf data/generated-bundles
+      - /bin/rm -rf data/pax-web-jsp
+      - /bin/rm -rf data/tmp
+      - /bin/rm -rf data/log
+
+  - name: Remove Fabric8
+    command: /bin/rm -fr {{ remote_path }}/{{ fabric8_name }}
+    
+
