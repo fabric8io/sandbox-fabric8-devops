@@ -13,6 +13,10 @@ Or if you are using [vagrant](http://www.vagrantup.com/downloads.html) or have s
 Then to view the requirements:
 
     requirements-list
+
+To view the current status of the autoscaler type:
+
+    autoscale-status
     
 You can use local file system access to these templates if you want to checkout this repository and play with them.
 
