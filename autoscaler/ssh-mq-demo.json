@@ -4,8 +4,8 @@
             "minimumInstances": 1,
             "profile": "mq-default",
             "sshScalingRequirements": {
-                "hostPatterns": [
-                    "brokerbox*"
+                "hostTags": [
+                    "mq"
                 ]
             }
         },
@@ -16,8 +16,8 @@
             "minimumInstances": 1,
             "profile": "quickstarts-karaf-camel.amq",
             "sshScalingRequirements": {
-                "hostPatterns": [
-                    "!brokerbox*"
+                "hostTags": [
+                    "esb"
                 ]
             }
         }
@@ -26,13 +26,15 @@
         "defaultPath": "/opt/fabric8",
         "defaultUsername": "root",
         "defaultPassword": "vagrant",
-        "hosts": {
-            "brokerbox1": {
-                "hostName": "integration1"
+        "hosts": [
+            {
+                "hostName": "integration1",
+                "tags": ["mq"]
             },
-            "esbbox1": {
-                "hostName": "integration2"
+            {
+                "hostName": "integration2",
+                "tags": ["esb"]
             }
-        }
+        ]
     }
 }
