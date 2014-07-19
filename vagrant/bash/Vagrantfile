@@ -45,6 +45,25 @@ echo firewall disabled!
 echo >> /etc/hosts
 echo "#{localmachineip} #{hostname}" >> /etc/hosts
 echo "added ip address #{localmachineip} for host #{hostname} in /etc/hosts"
+
+# lets install docker
+wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+rpm -ivh epel-release-6-8.noarch.rpm
+sudo yum install -y docker-io
+sudo service docker start
+sudo chkconfig docker on
+
+echo "Pulling some common fabric8 docker images down. This takes a while!"
+echo "Note that little appears on the screen while this is happening so you might think its blocked ;)"
+echo "You might want to disable this bit if time is short and you're not using docker anyway"
+
+# lets pull some docker images
+docker pull fabric8/fabric8-java
+docker pull fabric8/fabric8
+
+# lets pull again just in case ;)
+docker pull fabric8/fabric8-java
+docker pull fabric8/fabric8
 SCRIPT
 
 
