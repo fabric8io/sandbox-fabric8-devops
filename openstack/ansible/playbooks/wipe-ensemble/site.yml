@@ -3,6 +3,7 @@
   vars: 
       remote_path: "{{ lookup('env', 'FABRIC8_ANSIBLE_REMOTE_PATH') }}"
       fabric8_name: "{{ lookup('env', 'FABRIC8_ANSIBLE_NAME')  }}"
+      full_path: "{{ remote_path }}/{{ fabric8_name }}" 
   remote_user: cloud-user
   sudo: yes
   tasks:
@@ -20,7 +21,7 @@
       - /bin/rm -rf data/tmp
       - /bin/rm -rf data/log
 
-  - name: Remove Fabric8
-    command: /bin/rm -fr "{{ remote_path }}/{{ fabric8_name }}/containers"
     
+  - name: Remove Fabric8 distro
+    command: /bin/rm -fr "{{ full_path }}"
 

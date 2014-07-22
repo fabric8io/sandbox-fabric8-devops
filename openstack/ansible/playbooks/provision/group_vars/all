@@ -1,0 +1,8 @@
+karaf_ssh_port: 8101
+rmi_server_port: 44444
+rmi_registry_port: 1099
+zookeeper_port: 2181
+http_port: 8181
+activemq_port: 61616
+zk_peer_port: 2888
+zk_election_port: 3888
