@@ -1,4 +1,4 @@
 export FABRIC8_ANSIBLE_REMOTE_PATH=/opt/fabric8
-export FABRIC8_ANSIBLE_NAME=jboss-fuse-6.1.0.redhat-379
+export FABRIC8_ANSIBLE_NAME=fabric8-karaf-1.1.0-SNAPSHOT
 export FABRIC8_ANSIBLE_USER_NAME=fabric8
 export FABRIC8_ANSIBLE_USER_GROUP=fabric8
