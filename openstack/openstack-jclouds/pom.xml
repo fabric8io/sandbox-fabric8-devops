@@ -1,0 +1,118 @@
+<!--
+
+     Copyright 2005-2014 Red Hat, Inc.
+
+     Red Hat licenses this file to you under the Apache License, version
+     2.0 (the "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+     implied.  See the License for the specific language governing
+     permissions and limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<properties>
+		<jclouds.version>1.7.3</jclouds.version>
+		<junit.version>4.11</junit.version>
+		<slf4j.version>1.7.7</slf4j.version>
+	</properties>
+	
+	<groupId>org.fabric8.jclouds.examples</groupId>
+	<artifactId>openstack-jclouds</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+	
+    <description>Fabric8 the open source integration platform</description>
+
+    <url>http://fabric8.io/</url>
+    
+	<dependencies>
+		<!-- jclouds dependencies -->
+		<dependency>
+			<groupId>org.apache.jclouds.driver</groupId>
+			<artifactId>jclouds-slf4j</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jclouds.driver</groupId>
+			<artifactId>jclouds-sshj</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<!-- jclouds OpenStack dependencies -->
+		<dependency>
+			<groupId>org.apache.jclouds.api</groupId>
+			<artifactId>openstack-keystone</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jclouds.api</groupId>
+			<artifactId>openstack-nova</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jclouds.labs</groupId>
+			<artifactId>openstack-swift</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jclouds.api</groupId>
+			<artifactId>openstack-cinder</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jclouds.api</groupId>
+			<artifactId>openstack-trove</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jclouds.labs</groupId>
+			<artifactId>openstack-glance</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jclouds.labs</groupId>
+			<artifactId>openstack-marconi</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jclouds.labs</groupId>
+			<artifactId>openstack-neutron</artifactId>
+			<version>${jclouds.version}</version>
+		</dependency>
+		<!-- 3rd party dependencies -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.25</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+	</dependencies>
+</project>
