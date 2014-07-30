@@ -20,10 +20,6 @@ VAGRANTFILE_API_VERSION = '2'
 end
 
 
-default_chef_root = '.'
-chef_root = ENV['AEM_CHEF_ROOT'] || default_chef_root
-
-
 centos_box_name = 'CentOS-6.5-x64-new'
 centos_box_url = 'https://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.5-x86_64-v20140504.box'
 
