@@ -6,6 +6,7 @@ A repository of devops examples for automatically provisioning and testing fabri
 The following folders may be of interest:
 
 * [autoscaler](autoscaler) for various [fabric8 autoscaler](http://fabric8.io/gitbook/requirements.html) demo templates
+* [kubernetes](kubernetes) for [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes) related scripts
 * [openstack](openstack) for [OpenStack](https://www.openstack.org/) related scripts
 * [openshift](openshift) for [OpenShift](http://openshift.com/) related scripts
 * [vagrant](vagrant) for [vagrant](http://www.vagrantup.com/) related scripts
