@@ -63,6 +63,11 @@ yum install -y make git golang mercurial
 export GOPATH="/opt/go"
 go get github.com/tools/godep
 
+echo installing etcd
+go get github.com/coreos/etcd
+go install github.com/coreos/etcd
+
+
 echo cloning kube
 mkdir -p {$GOPATH/src/github.com/GoogleCloudPlatform,/target}
 cd $GOPATH/src/github.com/GoogleCloudPlatform
@@ -74,6 +79,7 @@ make
 mkdir /opt/kube
 cp -f /opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin/* /opt/kube
 chmod +x /opt/kube/*
+sudo chown -R vagrant $GOPATH /opt/kube $GOPATH
 echo done!
 SCRIPT
 

@@ -34,4 +34,11 @@ If it barfs saying
 
 then edit the etcd startup line in hack/util.sh to:
 
-    etcd -data-dir ${ETCD_DIR} -l ${host}:${port} >/var/log/etcd.log 2>/var/log/etcd.log &
+    etcd -data-dir ${ETCD_DIR} -l ${host}:${port} >/tmp/etcd.log 2>/tmp/etcd.log &
+
+### Running fabric8 in kube
+
+Try this on the command line:
+
+    curl https://raw.githubusercontent.com/fabric8io/fabric8-devops/master/vagrant/kubernetes/fabric8-master.json > fabric8-master.json
+    kubecfg -c fabric8-master.json create pods
