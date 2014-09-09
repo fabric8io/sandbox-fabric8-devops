@@ -38,7 +38,16 @@ then edit the etcd startup line in hack/util.sh to:
 
 ### Running fabric8 in kube
 
-Try this on the command line:
+If you are on a linux box you'll need to grab the json:
 
     curl https://raw.githubusercontent.com/fabric8io/fabric8-devops/master/vagrant/kubernetes/fabric8-master.json > fabric8-master.json
+
+Otherwise do
+
+    cd /vagrant
+
+Then create the fabric8 pod via:
+
     kubecfg -c fabric8-master.json create pods
+
+You should now be able to access the hawtio web console via: http://kube1:48181/hawtio/
