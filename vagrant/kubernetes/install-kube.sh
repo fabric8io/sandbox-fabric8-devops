@@ -20,7 +20,7 @@ echo installaing go and make
 sudo yum install -y make git mercurial which
 sudo yum install -y golang
 export GOPATH="/opt/go"
-export PATH=$GOPATH/bin:$PATH:/usr/bin
+export PATH=$GOPATH/bin:$PATH:/usr/bin:/opt/kube
 
 go get github.com/tools/godep
 go get github.com/coreos/etcd

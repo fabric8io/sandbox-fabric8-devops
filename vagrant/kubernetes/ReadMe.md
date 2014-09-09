@@ -12,6 +12,11 @@ This takes a while! Then you'll have a box kube1 which you can ssh into and run 
 If you wish to use a separate Fedora image, then just run the **install-kube.sh** script as root on the box to install it all.
 Note that after you have run the install script you need to log out and log back in again so that you have karma to run docker.
 
+Then add these to your ~/.bashrc
+
+    export GOPATH="/opt/go"
+    export PATH=$GOPATH/bin:$PATH:/usr/bin:/opt/kube
+
 ### Running kube
 
 Type the following to get into the kube installation:
