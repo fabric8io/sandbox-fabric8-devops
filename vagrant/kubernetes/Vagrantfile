@@ -53,22 +53,21 @@ service docker start
 chkconfig docker on
 usermod -a -G docker vagrant
 
-echo installing etcd
-yum install -y etcd
-
 echo installing go and make
 yum install -y make git golang mercurial which
 
-echo export GOPATH="/opt/go" >> /home/vagrant/.bashrc
-echo export PATH=\$GOPATH/bin:\$PATH:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin  >> /home/vagrant/.bashrc
+echo 'export GOPATH=/opt/go' >> /home/vagrant/.bashrc
+echo 'export PATH=$GOPATH/bin:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin:$PATH'  >> /home/vagrant/.bashrc
 
 export GOPATH="/opt/go"
-export PATH=$GOPATH/bin:$PATH:/usr/bin
+export PATH=$GOPATH/bin:/usr/bin:$PATH
 
 go get github.com/tools/godep
 
-#go get github.com/coreos/etcd
-#go install github.com/coreos/etcd
+echo installing etcd
+#yum install -y etcd
+go get github.com/coreos/etcd
+go install github.com/coreos/etcd
 
 echo cloning kube
 mkdir -p $GOPATH/src/github.com/GoogleCloudPlatform
