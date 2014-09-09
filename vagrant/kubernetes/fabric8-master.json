@@ -1,0 +1,28 @@
+{
+    "id": "fabric8-master",
+    "desiredState": {
+        "manifest": {
+            "version": "v1beta1",
+            "id": "fabric8-master",
+            "containers": [
+                {
+                    "name": "master",
+                    "image": "fabric8/fabric8",
+                    "ports": [
+                        {
+                            "containerPort": 8181,
+                            "hostPort": 48181
+                        },
+                        {
+                            "containerPort": 8101,
+                            "hostPort": 48101
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "labels": {
+        "name": "fabric8-daemon"
+    }
+}

@@ -1,0 +1,108 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'socket'
+
+hostname = Socket.gethostname
+localmachineip = IPSocket.getaddress(Socket.gethostname)
+puts %Q{ This machine has the IP '#{localmachineip} and host name '#{hostname}'}
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = '2'
+
+%w(vagrant-hostmanager).each do |plugin|
+  # Will install dependent plugin
+  unless Vagrant.has_plugin?(plugin)
+    puts '*********************************'
+    puts "Installing #{plugin} plugin"
+    `vagrant plugin install #{plugin}`
+  end
+end
+
+
+centos_box_name = 'fedora20'
+centos_box_url = 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_fedora-20_chef-provisionerless.box'
+
+
+NETWORK_BASE = '192.168.50'
+
+FRONTEND_START_SEGMENT = 10
+INTEGRATION_START_SEGMENT = 20
+BACKEND_START_SEGMENT = 30
+
+$provisionScript = <<SCRIPT
+#echo disabling the firewall
+#service iptables save
+#service iptables stop
+#chkconfig iptables off
+#echo firewall disabled!
+
+# lets add the host name to the etc hosts
+echo 127.0.0.1 localhost kube1 kube1 >> /etc/hosts
+echo >> /etc/hosts
+echo "#{localmachineip} #{hostname}" >> /etc/hosts
+echo "added ip address #{localmachineip} for host #{hostname} in /etc/hosts"
+
+# install kubernetes
+echo adding epel-release
+yum install -y epel-release
+
+echo installing docker
+yum install -y docker-io
+service docker start
+chkconfig docker on
+usermod -a -G docker vagrant
+
+echo "Pulling some common fabric8 docker images down. This takes a while!"
+
+# lets pull some docker images
+docker pull fabric8/fabric8
+
+echo installaing go and make
+yum install -y make git golang mercurial
+export GOPATH="/opt/go"
+go get github.com/tools/godep
+
+echo cloning kube
+mkdir -p {$GOPATH/src/github.com/GoogleCloudPlatform,/target}
+cd $GOPATH/src/github.com/GoogleCloudPlatform
+
+git clone https://github.com/GoogleCloudPlatform/kubernetes
+cd kubernetes
+echo building kube....
+make
+mkdir /opt/kube
+cp -f /opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin/* /opt/kube
+chmod +x /opt/kube/*
+echo done!
+SCRIPT
+
+$addToBashRc = <<SCRIPT
+export GOPATH=/opt/go
+export PATH=$GOPATH/bin:/opt/kube:$PATH
+SCRIPT
+
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.ignore_private_ip = false
+  config.hostmanager.include_offline = true
+
+  # how many boxes do we need?
+    (1..1).each do |i|
+
+      vmname = "kube#{i}"
+      config.vm.define vmname.to_sym do |integration|
+
+        # Every Vagrant virtual environment requires a box to build off of.
+        integration.vm.box = centos_box_name
+        integration.vm.box_url = centos_box_url
+        integration.vm.network :private_network, ip: "#{NETWORK_BASE}.#{FRONTEND_START_SEGMENT+i}"
+        integration.vm.hostname = vmname
+      end
+      
+      config.vm.provision "shell", inline: $provisionScript
+    end
+  end
