@@ -53,39 +53,36 @@ service docker start
 chkconfig docker on
 usermod -a -G docker vagrant
 
-echo "Pulling some common fabric8 docker images down. This takes a while!"
+echo installing etcd
+yum install -y etcd
 
-# lets pull some docker images
-docker pull fabric8/fabric8
+echo installing go and make
+yum install -y make git golang mercurial which
 
-echo installaing go and make
-yum install -y make git golang mercurial
+echo export GOPATH="/opt/go" >> /home/vagrant/.bashrc
+echo export PATH=\$GOPATH/bin:\$PATH:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin  >> /home/vagrant/.bashrc
+
 export GOPATH="/opt/go"
+export PATH=$GOPATH/bin:$PATH:/usr/bin
+
 go get github.com/tools/godep
 
-echo installing etcd
-go get github.com/coreos/etcd
-go install github.com/coreos/etcd
-
+#go get github.com/coreos/etcd
+#go install github.com/coreos/etcd
 
 echo cloning kube
-mkdir -p {$GOPATH/src/github.com/GoogleCloudPlatform,/target}
+mkdir -p $GOPATH/src/github.com/GoogleCloudPlatform
 cd $GOPATH/src/github.com/GoogleCloudPlatform
 
 git clone https://github.com/GoogleCloudPlatform/kubernetes
 cd kubernetes
-echo building kube....
-make
-mkdir /opt/kube
-cp -f /opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin/* /opt/kube
-chmod +x /opt/kube/*
-sudo chown -R vagrant $GOPATH /opt/kube $GOPATH
-echo done!
-SCRIPT
+sudo chown -R vagrant $GOPATH
 
-$addToBashRc = <<SCRIPT
-export GOPATH=/opt/go
-export PATH=$GOPATH/bin:/opt/kube:$PATH
+echo "Pulling some common fabric8 docker images down. This takes a while!"
+
+# lets pull some docker images
+docker pull fabric8/fabric8
+echo done!
 SCRIPT
 
 
