@@ -76,7 +76,7 @@ cd $GOPATH/src/github.com/GoogleCloudPlatform
 
 git clone https://github.com/GoogleCloudPlatform/kubernetes
 cd kubernetes
-sudo chown -R vagrant $GOPATH
+chown -R vagrant $GOPATH
 
 echo "Pulling some common fabric8 docker images down. This takes a while!"
 
