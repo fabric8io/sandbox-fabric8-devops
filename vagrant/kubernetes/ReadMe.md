@@ -15,8 +15,8 @@ Note that after you have run the install script you need to log out and log back
 
 Then add these to your ~/.bashrc
 
-    export GOPATH="/opt/go"
-    export PATH=$GOPATH/bin:$PATH:/usr/bin:/opt/kube
+    export GOPATH=/opt/go
+    export PATH=$GOPATH/bin:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/hack:$PATH
 
 ## Running kube
 
