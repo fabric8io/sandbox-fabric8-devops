@@ -53,4 +53,8 @@ Then create the fabric8 pod via:
 
     kubecfg -c fabric8-master.json create pods
 
-You should now be able to access the hawtio web console via: http://kube1:48181/hawtio/
+You can then check on the pods via
+
+    kubecfg list /pods
+
+Once it starts up you should now be able to access the hawtio web console via: http://kube1:48181/hawtio/
