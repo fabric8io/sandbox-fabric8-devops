@@ -57,7 +57,9 @@ echo installing go and make
 yum install -y make git golang mercurial which
 
 echo 'export GOPATH=/opt/go' >> /home/vagrant/.bashrc
-echo 'export PATH=$GOPATH/bin:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/hack:$PATH'  >> /home/vagrant/.bashrc
+echo 'export PATH=$GOPATH/bin:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin:/home/vagrant/kubernetes/hack:$PATH'  >> /home/vagrant/.bashrc
+echo export ETCD_HOST=#{localmachineip} >> /home/vagrant/.bashrc
+echo export API_HOST=#{localmachineip} >> /home/vagrant/.bashrc
 
 export GOPATH="/opt/go"
 export PATH=$GOPATH/bin:/usr/bin:$PATH
@@ -76,6 +78,12 @@ cd $GOPATH/src/github.com/GoogleCloudPlatform
 git clone https://github.com/GoogleCloudPlatform/kubernetes
 cd kubernetes
 chown -R vagrant $GOPATH
+
+
+# now lets clone the updated hack scripts
+cd /home/vagrant
+git clone https://github.com/jstrachan/kubernetes
+chown -R vagrant /home/vagrant/kubernetes
 
 echo "Pulling some common fabric8 docker images down. This takes a while!"
 
