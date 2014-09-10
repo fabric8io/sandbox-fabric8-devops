@@ -57,7 +57,7 @@ echo installing go and make
 yum install -y make git golang mercurial which
 
 echo 'export GOPATH=/opt/go' >> /home/vagrant/.bashrc
-echo 'export PATH=$GOPATH/bin:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin:$PATH'  >> /home/vagrant/.bashrc
+echo 'export PATH=$GOPATH/bin:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/hack:$PATH'  >> /home/vagrant/.bashrc
 
 export GOPATH="/opt/go"
 export PATH=$GOPATH/bin:/usr/bin:$PATH
