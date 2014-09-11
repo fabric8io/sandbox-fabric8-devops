@@ -58,3 +58,13 @@ You can then check on the pods via
     kubecfg list /pods
 
 Once it starts up you should now be able to access the hawtio web console via: http://kube1:48181/hawtio/
+
+### Working on Kube from your Mac
+
+You should now be able to poll the REST API for kube via: http://kube1:8080/api/v1beta1/pods
+
+    curl http://kube1:8080/api/v1beta1/pods
+
+To access using a kube build on your mac or using fabric8 you need to point to the master via:
+
+    export KUBERNETES_MASTER=http://kube1:8080/
