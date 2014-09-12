@@ -30,6 +30,8 @@ FRONTEND_START_SEGMENT = 10
 INTEGRATION_START_SEGMENT = 20
 BACKEND_START_SEGMENT = 30
 
+KUBE_MASTER_HOST="#{NETWORK_BASE}.#{FRONTEND_START_SEGMENT+1}"
+
 $provisionScript = <<SCRIPT
 #echo disabling the firewall
 #service iptables save
@@ -58,9 +60,9 @@ yum install -y make git golang mercurial which
 
 echo 'export GOPATH=/opt/go' >> /home/vagrant/.bashrc
 echo 'export PATH=$GOPATH/bin:/usr/bin:/opt/go/src/github.com/GoogleCloudPlatform/kubernetes/_output/go/bin:/home/vagrant/kubernetes/hack:$PATH'  >> /home/vagrant/.bashrc
-echo export ETCD_HOST=#{localmachineip} >> /home/vagrant/.bashrc
-echo export API_HOST=#{localmachineip} >> /home/vagrant/.bashrc
-echo export KUBERNETES_MASTER=http://#{localmachineip}:8080/ >> /home/vagrant/.bashrc
+echo export ETCD_HOST=#{KUBE_MASTER_HOST} >> /home/vagrant/.bashrc
+echo export API_HOST=#{KUBE_MASTER_HOST} >> /home/vagrant/.bashrc
+echo export KUBERNETES_MASTER=http://#{KUBE_MASTER_HOST}:8080/ >> /home/vagrant/.bashrc
 
 export GOPATH="/opt/go"
 export PATH=$GOPATH/bin:/usr/bin:$PATH
