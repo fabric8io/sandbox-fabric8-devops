@@ -1,0 +1,24 @@
+{
+  "id": "docker-registry",
+  "desiredState": {
+    "manifest": {
+      "version": "v1beta1",
+      "id": "fabric8-master",
+      "containers": [
+        {
+          "name": "registry",
+          "image": "registry",
+          "ports": [
+            {
+              "containerPort": 2375,
+              "hostPort": 2375
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "labels": {
+    "name": "docker-registry"
+  }
+}
