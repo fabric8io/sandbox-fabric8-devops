@@ -71,6 +71,7 @@ go get github.com/tools/godep
 
 echo installing etcd
 #yum install -y etcd
+mkdir -p $GOHOME/src/github.com/coreos
 go get github.com/coreos/etcd
 cd $GOHOME/src/github.com/coreos/etcd
 git checkout tags/v0.4.6
