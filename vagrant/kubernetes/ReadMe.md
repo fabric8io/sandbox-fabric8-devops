@@ -68,3 +68,18 @@ You should now be able to poll the REST API for kube via: http://kube1:8080/api/
 To access using a kube build on your mac or using fabric8 you need to point to the master via:
 
     export KUBERNETES_MASTER=http://kube1:8080/
+
+
+### Creating a docker registry
+
+Its a good idea to create a local docker registry so if you're using fabric8 you can create custom images and push them to the kube environment.
+
+    kubecfg -c docker-registry.json create pods
+
+If you want to use fabric8 and kube together then these env vars are handy:
+
+    export FABRIC8_PROFILES=kubernetes
+    export DOCKER_USERNAME=kube1:5000
+    export DOCKER_HOST=tcp://kube1:2375
+
+Then if you boot up a recent fabric8 build (or 1.2.0.Beta5 or later) you'll have a kube UI, CLI and tooling etc.

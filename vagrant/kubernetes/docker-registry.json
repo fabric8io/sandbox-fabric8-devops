@@ -10,8 +10,8 @@
           "image": "registry",
           "ports": [
             {
-              "containerPort": 2375,
-              "hostPort": 2375
+              "containerPort": 5000,
+              "hostPort": 5000
             }
           ]
         }

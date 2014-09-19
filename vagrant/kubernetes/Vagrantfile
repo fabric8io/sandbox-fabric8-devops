@@ -72,7 +72,9 @@ go get github.com/tools/godep
 echo installing etcd
 #yum install -y etcd
 go get github.com/coreos/etcd
-go install github.com/coreos/etcd
+cd $GOHOME/src/github.com/coreos/etcd
+git checkout tags/v0.4.6
+go install github.coreos/etcd
 
 echo cloning kube
 mkdir -p $GOPATH/src/github.com/GoogleCloudPlatform
